@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">GLM Web Shell</string>
+    <string name="qs_new_chat">New GLM chat</string>
+
+    <!-- Disclaimer per TZ §10 -->
+    <string name="disclaimer">Unofficial client. Not affiliated with Z.ai.</string>
+
+    <!-- Chat -->
+    <string name="chat_loading">Loading…</string>
+    <string name="chat_offline">The site is unavailable.</string>
+    <string name="chat_retry">Retry</string>
+
+    <!-- Settings -->
+    <string name="settings_theme">Theme</string>
+    <string name="settings_proxy">Proxy</string>
+    <string name="settings_clear_site_data">Sign out &amp; clear site data</string>
+    <string name="settings_clear_history">Delete local chat history</string>
+
+    <!-- Diagnostics -->
+    <string name="diagnostics_title">Diagnostics</string>
+    <string name="diagnostics_report">Report problem</string>
+</resources>

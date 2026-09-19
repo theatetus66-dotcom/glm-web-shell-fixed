@@ -1,0 +1,15 @@
+<resources>
+    <!-- Base theme; the splash screen variant is a child of this -->
+    <style name="Theme.GlmWebShell" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@color/window_background</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+
+    <!-- Splash screen theme (TZ §6.1.10 — fast cold start) -->
+    <style name="Theme.GlmWebShell.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/window_background</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
+        <item name="postSplashScreenTheme">@style/Theme.GlmWebShell</item>
+    </style>
+</resources>

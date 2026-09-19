@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!-- Per TZ §7 — no cleartext traffic -->
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors>
+            <certificates src="system" />
+            <!-- User CA store disabled to prevent MITM on the chat origin. -->
+        </trust-anchors>
+    </base-config>
+    <domain-config cleartextTrafficPermitted="false">
+        <domain includeSubdomains="true">chat.z.ai</domain>
+        <domain includeSubdomains="true">z.ai</domain>
+    </domain-config>
+</network-security-config>

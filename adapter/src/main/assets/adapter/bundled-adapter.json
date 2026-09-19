@@ -1,0 +1,79 @@
+{
+  "manifest": {
+    "adapterVersion": 1,
+    "minAppVersion": "1.0.0",
+    "channel": "stable",
+    "generatedAt": "2026-09-19T00:00:00Z",
+    "targetHost": "chat.z.ai",
+    "capabilities": [
+      {
+        "id": "nav",
+        "adapterVersion": 1,
+        "minAppVersion": "1.0.0",
+        "strategies": [
+          { "type": "URL", "name": "nav.url-template", "urlTemplate": "https://chat.z.ai/c/${id}", "rank": 0 }
+        ],
+        "selfTest": { "onPage": "any", "expect": "URL template present" },
+        "killSwitch": false
+      },
+      {
+        "id": "chat.observe",
+        "adapterVersion": 1,
+        "minAppVersion": "1.0.0",
+        "strategies": [
+          { "type": "NETWORK", "name": "observe.network", "endpointPatterns": ["/api/chat", "/conversation"], "parseRule": { "path": "messages", "userPath": "role=='user'", "assistantPath": "role=='assistant'", "streamDelimiter": "data:" }, "rank": 0 },
+          { "type": "SEMANTIC_DOM", "name": "observe.role-log", "semanticRules": [ { "role": "log", "ariaLive": "polite", "notEmpty": true } ], "rank": 1 }
+        ],
+        "selfTest": { "onPage": "chat", "expect": "role=log or /api/chat endpoint" },
+        "killSwitch": false
+      },
+      {
+        "id": "chat.input.fill",
+        "adapterVersion": 1,
+        "minAppVersion": "1.0.0",
+        "strategies": [
+          { "type": "SEMANTIC_DOM", "name": "input.textbox", "semanticRules": [ { "role": "textbox" }, { "contentEditable": true }, { "tag": "textarea" } ], "rank": 0 },
+          { "type": "CSS_SELECTOR", "name": "input.textarea-fallback", "selector": "textarea", "rank": 1 },
+          { "type": "CLIPBOARD_HINT", "name": "input.clipboard-hint", "rank": 2 }
+        ],
+        "selfTest": { "onPage": "chat", "expect": "textbox / contenteditable / textarea present", "selector": "textarea, [contenteditable], [role=textbox]" },
+        "killSwitch": false
+      },
+      {
+        "id": "chat.send",
+        "adapterVersion": 1,
+        "minAppVersion": "1.0.0",
+        "strategies": [
+          { "type": "SEMANTIC_DOM", "name": "send.button", "semanticRules": [ { "tag": "button", "textMatches": "send|submit" } ], "rank": 0 },
+          { "type": "CSS_SELECTOR", "name": "send.enter-key", "selector": "textarea", "rank": 1 }
+        ],
+        "selfTest": { "onPage": "chat", "expect": "send button reachable", "selector": "button[type=submit], button[aria-label*='Send' i]" },
+        "killSwitch": false
+      },
+      {
+        "id": "session.status",
+        "adapterVersion": 1,
+        "minAppVersion": "1.0.0",
+        "strategies": [
+          { "type": "URL", "name": "session.url", "urlTemplate": "https://chat.z.ai/", "rank": 0 },
+          { "type": "SEMANTIC_DOM", "name": "session.form-hint", "semanticRules": [ { "tag": "form" } ], "rank": 1 }
+        ],
+        "selfTest": { "onPage": "any", "expect": "URL not redirected to /login" },
+        "killSwitch": false
+      },
+      {
+        "id": "files.attach",
+        "adapterVersion": 1,
+        "minAppVersion": "1.0.0",
+        "strategies": [
+          { "type": "SEMANTIC_DOM", "name": "files.chooser-hook", "semanticRules": [ { "tag": "input" } ], "rank": 0 }
+        ],
+        "selfTest": { "onPage": "chat", "expect": "WebChromeClient.onShowFileChooser wired" },
+        "killSwitch": false
+      }
+    ]
+  },
+  "signature": "",
+  "signatureAlgorithm": "none",
+  "publicKeyId": "bundled"
+}

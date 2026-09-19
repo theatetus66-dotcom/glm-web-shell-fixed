@@ -1,0 +1,12 @@
+# Copy this file to `local.properties` (it's gitignored).
+# The Android Gradle plugin uses it to locate the Android SDK.
+#
+# On macOS, the SDK is usually at:
+#   ~/Library/Android/sdk
+# On Linux:
+#   ~/Android/Sdk
+# On Windows:
+#   %LOCALAPPDATA%/Android/sdk
+#
+# In GitHub Actions, the workflow writes `sdk.dir=$ANDROID_HOME` itself.
+sdk.dir=/path/to/Android/Sdk
