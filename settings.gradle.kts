@@ -22,7 +22,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "GLM Web Shell"
+rootProject.name = "glm-web-shell"
 
 include(":app")
 
